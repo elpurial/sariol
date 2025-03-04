@@ -1,0 +1,88 @@
+{% extends 'base_portafolio.html'%}
+{% load static %}
+<title>{% block title%} Servicio prestados en el hostal {% endblock %}</title>
+{% load static %}
+
+{% block content %}
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="">Home</a></li>
+          <li>Servicios del Hostal RX</li>
+        </ol>
+        <h2>Servicios del Hostal RX</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <article class="entry">
+
+              <div class="entry-img">
+                <img src="{% static '/img/blog/blog-1.jpg' %}" alt="Imagen no disponible" class="img-fluid">
+              </div>
+              <h2> Servicios que se prestan: </h2>
+             {% for servicio in servicio %}    
+              <div class="entry-meta">
+               <h2>{{ servicio.nombre}}</h2>
+               <p> El costo {{ servicio.precio}}  </p>
+               <img src="{{ servicio.imagen.url}}" alt="Imagen no disponible" class="img-fluid">
+              </div>
+
+              {% endfor %} 
+              <div class="entry-content">
+                <p>
+                  
+                </p>
+                <div class="read-more">
+                  <a href="blog-single.html">Read More</a>
+                </div>
+              </div>
+
+            </article><!-- End blog entry -->
+
+            <article class="entry">
+
+              <div class="entry-img">
+                <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="blog-single.html">Nisi magni odit consequatur autem nulla dolorem</a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">John Doe</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <p>
+                  Incidunt voluptate sit temporibus aperiam. Quia vitae aut sint ullam quis illum voluptatum et. Quo libero rerum voluptatem pariatur nam.
+                  Ad impedit qui officiis est in non aliquid veniam laborum. Id ipsum qui aut. Sit aliquam et quia molestias laboriosam. Tempora nam odit omnis eum corrupti qui aliquid excepturi molestiae. Facilis et sint quos sed voluptas. Maxime sed tempore enim omnis non alias odio quos distinctio.
+                </p>
+                <div class="read-more">
+                  <a href="blog-single.html">Read More</a>
+                </div>
+              </div>
+
+            </article><!-- End blog entry -->
+
+           
+  </main><!-- End #main -->
+  {% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base_portafolio.html'%}
+{% load static %}
+<title>{% block title%} Registro {% endblock %}</title>
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}<br><br>
+
+<div class="container">
+      <br><br><br>
+       <div class="row g-3 align-items-center">
+       
+       <form method="post" action=""> 
+       {% csrf_token %}
+       <div style="width:75%;margin:auto;">
+            <ul class="messages">
+                  {% for mensaje in messages %}
+                  <li> {{ mensaje }} </li>
+                  {% endfor %}
+            </ul>    
+       {{form|crispy}}
+      
+       <br>
+       <button class="btn btn-primary" type="submit">Enviar datos</button> 
+       </form>
+      </div>
+</div>
+</div> 
+{% endblock %}

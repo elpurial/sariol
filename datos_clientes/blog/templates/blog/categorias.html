@@ -1,0 +1,30 @@
+{% extends 'base_portafolio.html'%}
+{% load static %}
+<title>{% block title%} Categorias y posts {% endblock %}</title>
+{% load static %}
+
+{% block content %}
+
+<br><br>
+<section >
+   <div class="container">     
+     <div class="row align-items-start "> 
+      {% for p in blog %}               
+        <div class="col-lg-4 " >
+          <div class="card"style="width: 18rem;"> 
+              <img src="{{p.imagen.url }}" alt="Imagen No disponible" class="img-fluid">
+              <div class="card-body">
+                <h5 class="card-title"> {{p.titulo }}</a></h5>
+                <p class="card-text">{{p.contenido }}.</p>               
+                
+                
+                <a href=" " class="btn btn-primary">Ver m&aacute;s</a>
+              </div>
+        </div> <br>  
+      </div>
+      {% endfor %}
+     </div>  
+  </section><!-- /Blog Posts Section -->
+
+</main>
+{% endblock %}

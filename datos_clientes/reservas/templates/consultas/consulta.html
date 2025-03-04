@@ -1,0 +1,58 @@
+{% extends 'base_portafolio.html'%}
+{% load static %}
+<title>{% block title%} Categorias y posts {% endblock %}</title>
+{% load static %}
+
+{% block content %}
+<br><br>
+<section >
+  <div class="container">     
+    <div class="row align-items-start "> 
+     
+<h2>Control de las reservas</h2>
+{% for reserva in page_obj %}
+
+<ul class="list-group">
+    <li class="list-group-item">{{ reserva.correo}}  </li>
+    
+  </ul>
+
+   {% endfor %}
+   <br><br><br><hr>
+   <h5> Total de reservas en esta p&aacute;gina: {{page_obj|length}}</h5>
+ </div>
+
+  
+    <nav aria-label="...">
+      <ul class="pagination">
+        <li class="page-item disabled">
+          {% if page_obj.has_previous %}
+          <span class="page-link" <a href="?page={{ page_obj.previous_page_number }}"> Previous</span>
+          {% endif %}
+        </li>
+        <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+        <li class="page-item"><a class="page-link" href="?page=2">2</a></li>       
+        <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+        <li class="page-item"><a class="page-link" href="?page=4">4</a></li>
+
+        <li class="page-item">
+          {% if page_obj.has_next %}
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+          {% endif %}
+        </li>
+        <li class="page-item">
+          {% if page_obj.has_next %}
+          <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">&Uacute;ltimo &nbsp; P&aacute;gina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }} </a> 
+          {% endif %}
+        </li>
+      </ul>
+    </nav>
+
+
+
+
+
+
+</div>
+
+{% endblock %}

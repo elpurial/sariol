@@ -1,0 +1,32 @@
+{% extends 'base_portafolio.html'%}
+{% load static %}
+<title>{% block title%} Categorias y posts {% endblock %}</title>
+{% load static %}
+
+{% block content %}
+<br><br><br><br>
+
+<section >
+    <div class="container">  
+<h2> Control de las reservas </h2>
+
+<form action="{% url 'suceso' %}" method="GET"> 
+    {% csrf_token %}
+
+     <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="correo">
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Comentario</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comentarios"></textarea>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Enviar</button>
+      </div>
+
+
+</form>
+</div>
+</section>
+{% endblock %}

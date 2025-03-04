@@ -1,0 +1,53 @@
+{% extends 'base.html'%}
+{% load static %}
+<title>{% block title%} Compra de los servicios {% endblock %}</title>
+{% load static %}
+
+{% block content %}
+
+<br><br>
+<section >
+   <div class="container">  
+    <div style="float:right;"> 
+            
+     {% include "carro/widget.html" %}
+    
+
+     
+    </div>   
+    
+    
+    
+    <div class="row align-items-start "> 
+      
+   
+
+      {% for producto in producto %}   
+                  
+        <div class="col-md-4 " >
+          <div class="card" style="width:14rem;"> 
+              <img src="{{producto.imagen.url }}" alt="Imagen No disponible" class="img-fluid postales">
+              <div class="card-body">               
+                <p class="card-text">{{producto.nombre }}</p>  
+                <p class="card-text">{{producto.precio }}&nbsp;&euro;</p>  
+                <div class="read-more">
+
+                 <a href="{% url 'carro:agregar' producto.id %}"><button type="button" class="btn btn-primary">Agregar al carrito</button></a>
+
+                </div>
+             </div>
+        </div> <br>  
+      </div>
+     
+      {% endfor %} 
+     </div>
+     <style>
+       .postales {    
+        width:400px;
+        height:200px;      
+      }    
+    </style>
+  </section><!-- /Blog Posts Section -->
+
+
+{% endblock %}

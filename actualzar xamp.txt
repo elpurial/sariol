@@ -1,0 +1,19 @@
+0
+
+Tuve exactamente el mismo problema. Lo resolví de la siguiente manera:
+
+Reinstalé MariaDB en la versión x32 porque instalé primero la x64
+Copié "my-huge.ini" de "C:\xampp\mysql" a "C:\xampp\mysql\bin\my.ini"
+Ahora todo funciona como se esperaba, iniciar y detener todo funciona sin problemas. Supongo que hay alguna configuración específica que no es del todo correcta en el antiguo "my.ini" de XAMMP.
+
+Por supuesto, todo esto se hizo después de realizar estos pasos:
+
+Asegúrese de que todos los módulos estén detenidos desde el Panel de control de XAMPP
+Descargue un instalador de la última versión estable de MariaDB
+Renombré "C:\xampp\mysql" a "C:\xampp\mysql_old"
+Instalé el MariaDB descargado en "C:\xampp\mysql"
+Copié los siguientes directorios para mantener mis bases de datos:
+C:\xampp\mysql\data
+C:\xampp\mysql\scripts
+C:\xampp\mysql\share
+Ejecute el módulo Apache y MySQL desde el Panel de control de XAMPP y listo.

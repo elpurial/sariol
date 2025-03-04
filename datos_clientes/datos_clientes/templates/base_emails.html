@@ -1,0 +1,27 @@
+{% load static %}
+<html lang="es">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        
+        <link href="{% static '/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+        <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+     
+
+
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+   
+
+        <div class="container mt-5">
+            {% block content %}{% endblock content %}
+        </div>
+
+    
+        <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    </body>
+</html>

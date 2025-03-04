@@ -1,0 +1,43 @@
+ <!-- ======= Header ======= -->
+ {% load static %}
+ 
+ <header id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="{% static '/img/logo.jpg' %}" alt="Imagen no disponible">
+        <span>Hostal RX</span>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="/">Home</a></li>
+           
+          {% if user.is_authenticated %}  
+          <li><a class="nav-link scrollto" href="/somos">Qienes somos</a></li>        
+          <li><a class="nav-link scrollto" href="/blog">Blog</a></li>
+          <li><a class="nav-link scrollto" href="/servicios">Servicios</a></li>
+          <li><a class="nav-link scrollto" href="/gmails">Correos</a></li>
+          <li><a class="nav-link scrollto" href="/reservas/crear">Reservas</a></li>             
+          <li><a class="nav-link scrollto" href="/contacto">Cont&aacute;ctenos</a></li>
+          {% endif %}
+        </ul>
+          
+     
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+      <div class="alert alert-primary" role="alert">
+
+           {% if user.is_authenticated %}
+           Hola  {{user.username}} &nbsp;&nbsp;<a href="{% url 'cerrar_sesion' %}"> Cerrar sesión </a>
+           {% else %}
+          
+           <a href= "{% url 'logear' %}"> Login </a> &nbsp;&nbsp; <a href="{% url 'autenticacion' %}"> Registrate </a>
+           
+
+           {% endif %}
+
+        <i class="bi bi-r-circle"></i>
+      
+    </div><br><br><br><br>
+  </header><!-- End Header -->

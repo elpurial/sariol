@@ -1,0 +1,91 @@
+{% extends 'base_portafolio.html'%}
+{% load static %}
+<title>{% block title%} Categorias y posts {% endblock %}</title>
+{% load static %}
+
+{% block content %}
+<br><br><br><br>
+
+<section >
+    <div class="container">  
+<h2 class="text-center"> Env&iacute;o de  reservas </h2><hr>
+
+<form action="{% url 'guardar' %}" method="POST"> 
+    {% csrf_token %}
+    <div class="container">
+        <div class="row align-items-start">
+
+            <div class="col">              
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre del cliente" name="cliente">
+              </div>  
+
+            <div class="col">            
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" name="correo">
+            </div>
+
+
+            <div class="col">              
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Pais" name="pais">
+            </div>
+        </div><br>
+
+        <div class="row align-items-start">
+
+            <div class="col">                
+                <input type="number"  class="form-control" id="exampleFormControlInput1" placeholder="Cant_habitaciones" name="cant_habitaciones">
+              </div>  
+
+            <div class="col">            
+              <input type="number"  class="form-control" id="cant_dias" placeholder="Cant_dias" name="cant_dias">
+            </div>
+            <div class="col">            
+                <input type="number"  class="form-control" id="cant_personas" placeholder="Cant_personas" name="cant_personas">
+              </div>
+              <div class="col"> 
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" name="desayuno" >
+              <label class="form-check-label" for="flexCheckChecked">
+                Desayuno
+              </label>
+              </div> 
+
+              <div class="col"> 
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" name="cena"  >
+                <label class="form-check-label" for="flexCheckChecked">
+                  Cena
+                </label>
+                </div> 
+           
+        </div><br>
+        <div class="row align-items-start">
+        <div class="col">  
+            <label> Fecha_entrada</lavel>            
+            <input type="date"  id="date" name="fecha_entrada"/>
+          </div>  
+
+        <div class="col">            
+            <label> Fecha_salida</lavel>            
+                <input type="date"  id="date" name="fecha_salida"/>
+        </div>
+        <div class="col">              
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Comentarios" name="comentarios"></textarea>
+          </div>
+
+       
+    </div><br>
+
+
+
+
+
+
+
+
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Enviar</button>
+      </div>
+
+
+</form>
+</div>
+</section>
+{% endblock %}
