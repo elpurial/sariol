@@ -9,11 +9,18 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+import dj_database_url
 import os
 
 
 
 RUTA_PROYECTO = os.path.dirname(os.path.realpath(__file__))
+
+
+
+
+
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,15 +31,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-lne-mhos$kkhu#i=&wjowrwd083hep2*#d*i++u^2a)eeu87r1'
+SECRET_KEY = os.environ.get('SECRET_KEY', default='your-default-secret-key' )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = [ 
    
     ]
-
+RENDER_EXTERNAL_HOSTNAME=os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
@@ -46,8 +55,7 @@ INSTALLED_APPS = [
     'tools',
     'servicios',
     'blog',
-    'tienda',
-    'compras',
+    'tienda',   
     'contacto',
     'widget_tweaks',
     'gmails',
@@ -59,9 +67,9 @@ INSTALLED_APPS = [
     'reservas', 
     'django_seed',
     'uno_a_uno',
-    'uno_a_muchos',
-    'gestores',
+    'uno_a_muchos',  
     'solicitudes',
+    
     
         
 ]
@@ -71,12 +79,14 @@ MESSAGE_LEVEL = mensajes_de_error.DEBUG
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'datos_clientes.urls'
@@ -108,14 +118,12 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "clientes",
-        "USER": "postgres",
-        "PASSWORD": "Adminascanio*-+1**",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
-    }
+    
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://postgres:postgres@localhost:5432/mysite',
+        conn_max_age=600
+    )
 }
 
 
@@ -156,6 +164,13 @@ DATE_INPUT_FORMATS = ['%d-%m-%Y']
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
+if not DEBUG:
+    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+    # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Directories to search for static files
 STATICFILES_DIRS = [
     os.path.join(RUTA_PROYECTO, "static"),
