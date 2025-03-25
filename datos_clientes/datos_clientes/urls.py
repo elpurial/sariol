@@ -35,7 +35,7 @@ urlpatterns = [
     path('reservas/', include('reservas.urls')), 
     path('uno_a_uno/', include('uno_a_uno.urls')), 
     path('uno_a_muchos/', include('uno_a_muchos.urls')), 
-    path('gestores/', include('gestores.urls')),                         
+                        
    
     ]
 

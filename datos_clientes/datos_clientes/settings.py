@@ -9,16 +9,14 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-import dj_database_url
+
 import os
+import dj_database_url
+from decouple import config
 
 
 
 RUTA_PROYECTO = os.path.dirname(os.path.realpath(__file__))
-
-
-
-
 
 
 from pathlib import Path
@@ -31,15 +29,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', default='your-default-secret-key' )
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'RENDER' not in os.environ
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = [ 
    
     ]
-RENDER_EXTERNAL_HOSTNAME=os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+RENDER_EXTERNAL_HOSTNAME=config('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
@@ -118,12 +116,16 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/mysite',
-        conn_max_age=600
-    )
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME":config('DB_NAME'),
+        "USER":config('DB_USER'),
+        "PASSWORD":config('DB_PASSWORD'),
+        "HOST":config('DB_HOST'),
+        "PORT": config('DB_PORT',cast=int)
+       
+        
+    }
 }
 
 
@@ -188,10 +190,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CONFIGURACION DEL CORREO ELECTRONICO
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'rodolfoelpurial@gmail.com'
-EMAIL_HOST_PASSWORD = 'dzga dtez gmhp tzpl'    # PASSWORD GENERADA EN GMAIL PARA ESTE CORREO (TENGO QUE HACERLO DESDE LA PROPIA CUENTA QUE PUSE ARRIBA)
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT',cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')   # PASSWORD GENERADA EN GMAIL PARA ESTE CORREO (TENGO QUE HACERLO DESDE LA PROPIA CUENTA QUE PUSE ARRIBA)
 EMAIL_USE_TLS = True
 
 
@@ -204,8 +206,7 @@ MESSAGE_TAGS = {
     mensajes_de_error.DEBUG:'debug',
     mensajes_de_error.SUCCESS: 'success',
     mensajes_de_error.WARNING:'warning',
-    mensajes_de_error.ERROR:'danger',
-    
+    mensajes_de_error.ERROR:'danger',    
     
     
 }
