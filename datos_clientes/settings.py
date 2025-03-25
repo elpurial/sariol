@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'datos_clientes.settings'
 import dj_database_url
 from decouple import config
 
